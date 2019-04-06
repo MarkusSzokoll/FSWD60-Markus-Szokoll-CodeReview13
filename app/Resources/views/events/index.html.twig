@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+       
+<h2 class="page-header"> Latest Events </h2>
+  Choose an event-type: 
+  <select name="myEventType">
+    <option value="music">music</option>
+    <option value="theater">theater</option>
+    <option value="show">show</option>
+    <option value="sport">sport</option>
+    <option value="movie">movie</option>
+  </select>
+
+  <table class="table table-striped">
+   <thead>
+       <tr>
+           <th>#</th>
+           <th>Event</th>
+           <th>Start Date</th>
+           <th></th>
+       </tr>
+   </thead>
+{% for event in events %}
+    <tbody>
+       <tr>
+           <th scope="row">{{event.id}}</th>
+           <td>{{event.name}}</td>
+           <td>{{event.start|date('F j, Y, g:i a')}}</td>
+           <td> <a href="/events/details/{{event.id}}" class="btn btn-success">View</a>
+                   
+           <a href="/events/edit/{{event.id}}" class="btn btn-default">Edit</a>
+           <a href="/events/delete/{{event.id}}" class="btn btn-danger">Delete</a>        
+           </td>
+       </tr> 
+{% endfor %}
+   </tbody>
+   </table>
+{% endblock %}
