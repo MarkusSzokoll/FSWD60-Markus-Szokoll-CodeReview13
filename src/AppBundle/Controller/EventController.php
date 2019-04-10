@@ -26,6 +26,16 @@ class EventController extends Controller
        return $this->render('events/index.html.twig', array('events'=>$events));
    }
     /**
+    * @Route("/sort/{type}", name="listType")
+    */
+   public function listType(Request $request, $type){
+
+// Here we will use getDoctrine to use doctrine and we will select the entity that we want to work with and we used findAll() to bring all the information from it and we will save it inside a variable named events and the type of the result will be an array 
+       $events = $this->getDoctrine()->getRepository('AppBundle:Events')->findBytype($type);
+       // replace this example code with whatever you need
+        return $this->render('events/sort.html.twig', array('events'=>$events, 'type' => $type));
+   }
+    /**
     * @Route("/events/create", name="createEvent")
     */
    public function createEvent(Request $request){
@@ -36,7 +46,7 @@ class EventController extends Controller
 /* Here we will build a form using createFormBuilder and inside this function we will put our object and then we write add then we select the input type then an array to add an attribute that we want in our input field */
        $form = $this->createFormBuilder($events)
     ->add('name', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:15px')))
-    ->add('start', DateTimeType::class, array('attr' => array('style'=>'margin-bottom:15px')))
+    ->add('start', DateTimeType::class, array('widget'=>'single_text','attr' => array('style'=>'margin-bottom:15px')))
     ->add('end', DateTimeType::class, array('attr' => array('style'=>'margin-bottom:15px')))
     ->add('description', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:15px')))
     ->add('image', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:15px')))

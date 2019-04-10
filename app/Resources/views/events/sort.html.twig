@@ -2,7 +2,6 @@
 {% block body %}
        
 <h2 class="page-header"> Latest Events </h2>
-  
   Choose an event-type:
   <a href="sort/music">music</a>  
   <a href="sort/music">theater</a>  
@@ -10,6 +9,10 @@
   <a href="sort/music">sport</a>  
   <a href="sort/music">movie</a>  
 
+<div class="pageheader">
+            <h1>Sort by "<b>{{type}}</b>"</h1>
+        <hr>
+    </div>
   <table class="table table-striped">
    <thead>
        <tr>
